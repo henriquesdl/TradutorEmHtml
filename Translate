@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Language Translator</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#translate").click(function() {
+        var text = $("#text").val();
+        var language = $("#language").val();
+        $.ajax({
+          url: "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=" + language + "&dt=t&q=" + encodeURIComponent(text),
+          success: function(data) {
+            $("#translation").html(data[0][0][0]);
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Language Translator</h1>
+  <textarea id="text"></textarea>
+  <select id="language">
+    <option value="en">English</option>
+    <option value="es">Spanish</option>
+    <option value="fr">French</option>
+    <option value="de">German</option>
+    <option value="it">Italian</option>
+  </select>
+  <button id="translate">Translate</button>
+  <div id="translation"></div>
+</body>
+</html>
